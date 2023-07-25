@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="tpshardwareDataSet1" targetNamespace="http://tempuri.org/tpshardwareDataSet1.xsd" xmlns:mstns="http://tempuri.org/tpshardwareDataSet1.xsd" xmlns="http://tempuri.org/tpshardwareDataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" GeneratorFunctionsComponentClassName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" UserFunctionsComponentName="QueriesTableAdapter" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="MySettings" AppSettingsPropertyName="tpshardwareConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="tpshardwareConnectionString (MySettings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.LisayHardware.My.MySettings.GlobalReference.Default.tpshardwareConnectionString" Provider="MySql.Data.MySqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="categoryTableAdapter" GeneratorDataComponentClassName="categoryTableAdapter" Name="category" UserDataComponentName="categoryTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="tpshardwareConnectionString (MySettings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT SUM(purchasesale.Item_quantity * purchasesale.cost) AS total_amount, payment.transdate, payment.discount, payment.total, payment.subtotal, payment.deliveryfee, purchasesale.Item_quantity, purchasesale.cost, items.Item_name, 
+                  unit.Units, payment.trans_id, customer.Name, customer.Address, purchasesale.cusid, items.Description
+FROM     purchasesale INNER JOIN
+                  payment ON payment.trans_id = purchasesale.Transaction_id INNER JOIN
+                  items ON purchasesale.Item_code = items.Item_code INNER JOIN
+                  unit ON unit.unit_id = items.unit_id INNER JOIN
+                  customer ON customer.Cust_id = payment.customer_id
+GROUP BY purchasesale.Pos_id, items.Description</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="total_amount" DataSetColumn="total_amount" />
+              <Mapping SourceColumn="transdate" DataSetColumn="transdate" />
+              <Mapping SourceColumn="discount" DataSetColumn="discount" />
+              <Mapping SourceColumn="total" DataSetColumn="total" />
+              <Mapping SourceColumn="subtotal" DataSetColumn="subtotal" />
+              <Mapping SourceColumn="deliveryfee" DataSetColumn="deliveryfee" />
+              <Mapping SourceColumn="Item_quantity" DataSetColumn="Item_quantity" />
+              <Mapping SourceColumn="cost" DataSetColumn="cost" />
+              <Mapping SourceColumn="Item_name" DataSetColumn="Item_name" />
+              <Mapping SourceColumn="Units" DataSetColumn="Units" />
+              <Mapping SourceColumn="trans_id" DataSetColumn="trans_id" />
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="Address" DataSetColumn="Address" />
+              <Mapping SourceColumn="cusid" DataSetColumn="cusid" />
+              <Mapping SourceColumn="Description" DataSetColumn="Description" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="tpshardwareConnectionString (MySettings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT SUM(purchasesale.Item_quantity * purchasesale.cost) AS total_amount, payment.transdate, payment.discount, payment.total, payment.subtotal, payment.deliveryfee, purchasesale.Item_quantity, purchasesale.cost, items.Item_name, 
+                  unit.Units, payment.trans_id, customer.Name, customer.Address, purchasesale.cusid, items.Description
+FROM     purchasesale INNER JOIN
+                  payment ON payment.trans_id = purchasesale.Transaction_id INNER JOIN
+                  items ON purchasesale.Item_code = items.Item_code INNER JOIN
+                  unit ON unit.unit_id = items.unit_id INNER JOIN
+                  customer ON customer.Cust_id = payment.customer_id
+               where purchasesale.Transaction_id=@tran_id
+GROUP BY purchasesale.Pos_id, items.Description</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="tran_id" ColumnName="Transaction_id" DataSourceName="tpshardware.purchasesale" DataTypeServer="int(11)" DbType="Int32" Direction="Input" ParameterName="@tran_id" Precision="0" ProviderType="Int32" Scale="0" Size="0" SourceColumn="Transaction_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="tpshardwareDataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="tpshardwareDataSet1" msprop:Generator_UserDSName="tpshardwareDataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="category" msprop:Generator_TableClassName="categoryDataTable" msprop:Generator_TableVarName="tablecategory" msprop:Generator_TablePropName="category" msprop:Generator_RowDeletingName="categoryRowDeleting" msprop:Generator_RowChangingName="categoryRowChanging" msprop:Generator_RowEvHandlerName="categoryRowChangeEventHandler" msprop:Generator_RowDeletedName="categoryRowDeleted" msprop:Generator_UserTableName="category" msprop:Generator_RowChangedName="categoryRowChanged" msprop:Generator_RowEvArgName="categoryRowChangeEvent" msprop:Generator_RowClassName="categoryRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="total_amount" msprop:Generator_ColumnVarNameInTable="columntotal_amount" msprop:Generator_ColumnPropNameInRow="total_amount" msprop:Generator_ColumnPropNameInTable="total_amountColumn" msprop:Generator_UserColumnName="total_amount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="transdate" msprop:Generator_ColumnVarNameInTable="columntransdate" msprop:Generator_ColumnPropNameInRow="transdate" msprop:Generator_ColumnPropNameInTable="transdateColumn" msprop:Generator_UserColumnName="transdate" type="xs:dateTime" />
+              <xs:element name="discount" msprop:Generator_ColumnVarNameInTable="columndiscount" msprop:Generator_ColumnPropNameInRow="discount" msprop:Generator_ColumnPropNameInTable="discountColumn" msprop:Generator_UserColumnName="discount" type="xs:decimal" />
+              <xs:element name="total" msprop:Generator_ColumnVarNameInTable="columntotal" msprop:Generator_ColumnPropNameInRow="total" msprop:Generator_ColumnPropNameInTable="totalColumn" msprop:Generator_UserColumnName="total" type="xs:decimal" />
+              <xs:element name="subtotal" msprop:Generator_ColumnVarNameInTable="columnsubtotal" msprop:Generator_ColumnPropNameInRow="subtotal" msprop:Generator_ColumnPropNameInTable="subtotalColumn" msprop:Generator_UserColumnName="subtotal" type="xs:decimal" />
+              <xs:element name="deliveryfee" msprop:Generator_ColumnVarNameInTable="columndeliveryfee" msprop:Generator_ColumnPropNameInRow="deliveryfee" msprop:Generator_ColumnPropNameInTable="deliveryfeeColumn" msprop:Generator_UserColumnName="deliveryfee" type="xs:decimal" />
+              <xs:element name="Item_quantity" msprop:Generator_ColumnVarNameInTable="columnItem_quantity" msprop:Generator_ColumnPropNameInRow="Item_quantity" msprop:Generator_ColumnPropNameInTable="Item_quantityColumn" msprop:Generator_UserColumnName="Item_quantity" type="xs:int" />
+              <xs:element name="cost" msprop:Generator_ColumnVarNameInTable="columncost" msprop:Generator_ColumnPropNameInRow="cost" msprop:Generator_ColumnPropNameInTable="costColumn" msprop:Generator_UserColumnName="cost" type="xs:decimal" />
+              <xs:element name="Item_name" msprop:Generator_ColumnVarNameInTable="columnItem_name" msprop:Generator_ColumnPropNameInRow="Item_name" msprop:Generator_ColumnPropNameInTable="Item_nameColumn" msprop:Generator_UserColumnName="Item_name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="45" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Units" msprop:Generator_ColumnVarNameInTable="columnUnits" msprop:Generator_ColumnPropNameInRow="Units" msprop:Generator_ColumnPropNameInTable="UnitsColumn" msprop:Generator_UserColumnName="Units">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="trans_id" msprop:Generator_ColumnVarNameInTable="columntrans_id" msprop:Generator_ColumnPropNameInRow="trans_id" msprop:Generator_ColumnPropNameInTable="trans_idColumn" msprop:Generator_UserColumnName="trans_id" type="xs:int" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="66" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Address" msprop:Generator_ColumnVarNameInTable="columnAddress" msprop:Generator_ColumnPropNameInRow="Address" msprop:Generator_ColumnPropNameInTable="AddressColumn" msprop:Generator_UserColumnName="Address">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="60" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="cusid" msprop:Generator_ColumnVarNameInTable="columncusid" msprop:Generator_ColumnPropNameInRow="cusid" msprop:Generator_ColumnPropNameInTable="cusidColumn" msprop:Generator_UserColumnName="cusid" type="xs:int" />
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="65535" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
